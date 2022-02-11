@@ -27,11 +27,10 @@ export default {
 body {
   font-family: "Nunito Sans", sans-serif;
 
-  .wrapper{
+  .wrapper {
     width: 100%;
     min-height: 100vh;
     background: $Very_Light_Gray;
   }
 }
-
 </style>

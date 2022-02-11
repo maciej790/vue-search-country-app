@@ -2,15 +2,20 @@
   <div class="country">
     <img class="country__img" :src="country.flags.png" />
     <div class="country__data">
-      <h2 class="country__data__name">{{ country.name }}</h2>
+      <h2 class="country__data__name">{{ country.name.common }}</h2>
       <p class="country__title">
         Population: <span class="country__result">{{ country.population }}</span>
       </p>
       <p class="country__title">
         Region: <span class="country__result">{{ country.region }}</span>
       </p>
-      <p class="country__title">
-        Capital: <span class="country__result">{{ country.capital }}</span>
+      <p v-if="country.capital" class="country__title">
+        Capital:
+        <span class="country__result">{{ country.capital[0] }}</span>
+      </p>
+      <p v-else class="country__title">
+        Capital:
+        <span class="country__result">None</span>
       </p>
     </div>
   </div>

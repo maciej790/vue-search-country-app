@@ -1,15 +1,11 @@
 <template>
   <section class="wrapper">
-    <SearchForm />
+    <SearchForm @searchByInput="searchByInput" @searchBySelect="searchBySelect" />
     <div class="wrapper__country" v-if="data && !isError && !isLoading">
       <Country v-for="country in data" :country="country" :key="country.alpha3Code" />
     </div>
-    <div class="wrapper__loading" v-if="isLoading">
-      <LoadingCircle />
-    </div>
-    <div class="wrapper__error" v-if="isError">
-      <Error />
-    </div>
+    <LoadingCircle v-if="isLoading" />
+    <Error v-else-if="isError" />
   </section>
 </template>
 
@@ -31,10 +27,26 @@ export default {
   },
 
   setup() {
-    const { results } = useCountry();
+    const { results, getData } = useCountry();
+
+    getData('https://restcountries.com/v3.1/all');
+
+    const searchByInput = (param) => {
+      if (param) {
+        getData(`https://restcountries.com/v3.1/name/${param}`);
+      }
+    };
+
+    const searchBySelect = (param) => {
+      if (param) {
+        getData(`https://restcountries.com/v3.1/region/${param}`);
+      }
+    };
 
     return {
       ...toRefs(results),
+      searchByInput,
+      searchBySelect,
     };
   },
 };

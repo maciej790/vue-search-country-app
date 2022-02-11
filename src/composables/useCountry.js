@@ -7,10 +7,11 @@ const useCountry = () => {
     isError: false,
   });
 
-  const getAllCountries = async () => {
+  const getData = async (query) => {
     results.isLoading = true;
     try {
-      const response = await fetch('https://restcountries.com/v2/all');
+      results.isError = false;
+      const response = await fetch(query);
       const json = await response.json();
       if (!response.ok) {
         throw new Error();
@@ -23,10 +24,8 @@ const useCountry = () => {
     }
   };
 
-  getAllCountries();
-
   return {
-    getAllCountries,
+    getData,
     results,
   };
 };

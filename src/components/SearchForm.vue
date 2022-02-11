@@ -1,10 +1,20 @@
 <template>
-  <form class="search">
-      <div class="search__loupe">
-          <i class="fas fa-search"></i>
-      </div>
-    <input type="text" placeholder="Search for a Country..." class="search__input" />
-    <select class="search__select">
+  <form class="search" @submit.prevent>
+    <div class="search__loupe">
+      <i class="fas fa-search"></i>
+    </div>
+    <input
+      type="text"
+      placeholder="Search for a Country..."
+      class="search__input"
+      @input="$emit('searchByInput', inputValue)"
+      v-model="inputValue"
+    />
+    <select
+      class="search__select"
+      v-model="selectValue"
+      @change="$emit('searchBySelect', selectValue)"
+    >
       <option value="">Filter by Region</option>
       <option value="Africa">Africa</option>
       <option value="America">America</option>
@@ -15,8 +25,21 @@
   </form>
 </template>
 <script>
+import { ref } from 'vue';
+
 export default {
   name: 'SearchForm',
+  emits: ['searchByInput', 'searchBySelect'],
+
+  setup() {
+    const inputValue = ref('');
+    const selectValue = ref('');
+
+    return {
+      inputValue,
+      selectValue,
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -30,14 +53,14 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
 
-  .search__loupe{
-      width: 50px;
-      height: 50px;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: $Dark_Gray;
+  .search__loupe {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $Dark_Gray;
   }
 
   .search__input {
