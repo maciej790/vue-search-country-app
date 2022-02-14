@@ -2,7 +2,7 @@
   <section class="wrapper">
     <SearchForm @searchByInput="searchByInput" @searchBySelect="searchBySelect" />
     <div class="wrapper__country" v-if="data && !isError && !isLoading">
-      <Country v-for="country in data" :country="country" :key="country.alpha3Code" />
+      <Country v-for="country in data" :country="country" :key="country.cca3" />
     </div>
     <LoadingCircle v-if="isLoading" />
     <Error v-else-if="isError" />
