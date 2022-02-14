@@ -116,6 +116,7 @@ export default {
         border: none;
         box-shadow: 0px 0px 16px -8px rgba(66, 68, 90, 1);
         margin: 10px 10px 0 0;
+        color: $Dark_Blue;
       }
     }
   }
